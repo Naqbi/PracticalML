@@ -42,9 +42,7 @@ nzv_test <- nearZeroVar(myTesting, saveMetrics = TRUE)
 if (any(nzv_test$nzv_test)) nzv_test else message("No variables with near zero variance")
 
 modFitA1 <- rpart(classe ~ ., data=myTraining, method="class")
-pdf(file = "Dec_Tree.pdf", paper = "a4r")
 rpart.plot(modFitA1, main="Decision Tree", extra=102, under=TRUE, faclen=0)
-dev.off()
 
 predictionsA1 <- predict(modFitA1, myTesting, type = "class")
 confusionMatrix(predictionsA1, myTesting$classe)
