@@ -54,3 +54,69 @@ Cross-validation will be performed by subsampling our training data set randomly
 The expected out-of-sample error will correspond to the quantity: 1-accuracy in the cross-validation data. Accuracy is the proportion of correct classified observation over the total sample in the subTesting data set. Expected accuracy is the expected accuracy in the out-of-sample data set (i.e. original testing data set). Thus, the expected value of the out-of-sample error will correspond to the expected number of missclassified observations/total observations in the Test data set, which is the quantity: 1-accuracy found from the cross-validation data set.
 
 Our outcome variable “classe” is an unordered factor variable. Thus, we can choose our error type as 1-accuracy. We have a large sample size with N= 19622 in the Training data set. This allow us to divide our Training sample into subTraining and subTesting to allow cross-validation. Features with all missing values will be discarded as well as features that are irrelevant. All other features will be kept as relevant variables. Decision tree and random forest algorithms are known for their ability of detecting the features that are important for classification [2].
+
+# Packages, Libraries and Seed
+Installing packages, loading libraries, and setting the seed for reproduceability:
+```{r echo=FALSE}
+rm(list=ls())
+```
+
+```{r}
+library(caret)
+library(randomForest)
+library(rpart) 
+library(rpart.plot)
+library(RColorBrewer)
+library(rattle)
+library(tree)
+```
+
+``` {r}
+set.seed(1234)
+```
+
+## Getting and cleaning data
+The training data set can be found on the following URL:
+```{r}
+training <- read.csv(url("https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv"), na.strings=c("NA","#DIV/0!",""))
+testing <- read.csv(url("https://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv"), na.strings=c("NA","#DIV/0!",""))
+
+# Create a partition with the training dataset.
+inTrain <- createDataPartition(y=training$classe, p=0.6, list=FALSE)
+myTraining <- training[inTrain, ]
+myTesting <- training[-inTrain, ]
+
+# Some variables are irrelevant to our current project: user_name, raw_timestamp_part_1, raw_timestamp_part_,2 cvtd_timestamp, new_window, and  num_window (columns 1 to 7). We can delete these variables.
+myTraining <- myTraining[, -(1:7)]
+myTesting <- myTesting[, -(1:7)]
+```
+
+``` {r}
+#we can see that where we have NA's, those columns are almost totaly full of them, so we are safe if I remove those columns
+#now I will keep just those variables with data
+myTraining <- myTraining[, colSums(is.na(myTraining)) == 0]
+myTesting <- myTesting[, colSums(is.na(myTesting)) == 0]
+
+# find and remove corelated variables/centering and scaling the data
+findCorrelation(cor(myTraining[,-53]), cutoff = .9, names = T)
+findCorrelation(cor(myTesting[,-53]), cutoff = .9, names = T)
+
+nzv <- nearZeroVar(myTraining, saveMetrics=TRUE)
+if (any(nzv$nzv)) nzv else message("No variables with near zero variance")
+
+nzv_test <- nearZeroVar(myTesting, saveMetrics = TRUE)
+if (any(nzv_test$nzv_test)) nzv_test else message("No variables with near zero variance")
+```
+# Data Modeling
+ML algorithms for prediction : Decision Tree
+``` {r}
+modFitA1 <- rpart(classe ~ ., data=myTraining, method="class")
+rpart.plot(modFitA1, main="Decision Tree", extra=102, under=TRUE, faclen=0)
+
+predictionsA1 <- predict(modFitA1, myTesting, type = "class")
+confusionMatrix(predictionsA1, myTesting$classe)
+
+modFitB1 <- randomForest(classe ~. , data=myTraining)
+predictionsB1 <- predict(modFitB1, myTesting, type = "class")
+confusionMatrix(predictionsB1, myTesting$classe)
+```
