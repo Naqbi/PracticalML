@@ -8,8 +8,8 @@ library(rattle)
 library(tree)
 
 set.seed(1234)
-training <- read.csv("pml-training.csv", na.strings=c("NA","#DIV/0!",""))
-testing <- read.csv("pml-testing.csv", na.strings=c("NA","#DIV/0!",""))
+training <- read.csv("https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv", na.strings=c("NA","#DIV/0!",""))
+testing <- read.csv("https://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv", na.strings=c("NA","#DIV/0!",""))
 inTrain <- createDataPartition(y=training$classe, p=0.6, list=FALSE)
 myTraining <- training[inTrain, ]
 myTesting <- training[-inTrain, ]
