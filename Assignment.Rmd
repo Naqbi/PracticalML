@@ -101,8 +101,8 @@ myTesting <- myTesting[, colSums(is.na(myTesting)) == 0]
 findCorrelation(cor(myTraining[,-53]), cutoff = .9, names = T)
 findCorrelation(cor(myTesting[,-53]), cutoff = .9, names = T)
 
-nzv <- nearZeroVar(myTraining, saveMetrics=TRUE)
-if (any(nzv$nzv)) nzv else message("No variables with near zero variance")
+nzv_train <- nearZeroVar(myTraining, saveMetrics=TRUE)
+if (any(nzv_train$nzv_train)) nzv_train else message("No variables with near zero variance")
 
 nzv_test <- nearZeroVar(myTesting, saveMetrics = TRUE)
 if (any(nzv_test$nzv_test)) nzv_test else message("No variables with near zero variance")
@@ -113,6 +113,8 @@ ML algorithms for prediction : Decision Tree
 modFitA1 <- rpart(classe ~ ., data=myTraining, method="class")
 rpart.plot(modFitA1, main="Decision Tree", extra=102, under=TRUE, faclen=0)
 ```
+
+Refer to PDF file to see the decision tree clearly.
 
 ``` {r echo = FALSE}
 pdf(file = "Dec_Tree.pdf", paper = "a4r")
