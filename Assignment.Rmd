@@ -120,3 +120,11 @@ modFitB1 <- randomForest(classe ~. , data=myTraining)
 predictionsB1 <- predict(modFitB1, myTesting, type = "class")
 confusionMatrix(predictionsB1, myTesting$classe)
 ```
+
+``` {r}
+# Generating the answers for the Assignment:
+predictionsB2 <- predict(modFitB1, testing, type = "class")
+```
+``` {r echo=FALSE}
+predictionsB2
+```
