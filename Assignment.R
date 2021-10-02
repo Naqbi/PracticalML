@@ -20,13 +20,13 @@ myTesting <- myTesting[, -(1:7)]
 #there are way to many NA's. I will create a function which will show
 #which variables are containing them
 #you can use: lapply(data_training, function(x) sum(is.na(x))) or
-show <- colSums(is.na(myTraining))
-show_testing <- colSums(is.na(myTesting))
+#show <- colSums(is.na(myTraining))
+#show_testing <- colSums(is.na(myTesting))
 
 #we can see that where we have NA's, those columns are almost totaly full of them, so we are safe if I remove those columns
 #now I will keep just those variables with data
-myTraining <- myTraining[, show == 0]
-myTesting <- myTesting[, show_testing == 0]
+myTraining <- myTraining[, colSums(is.na(myTraining)) == 0]
+myTesting <- myTesting[, colSums(is.na(myTesting)) == 0]
 
 #find and remove corelated variables/centering and scaling the data
 findCorrelation(cor(myTraining[,-53]), cutoff = .9, names = T)
