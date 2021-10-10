@@ -328,7 +328,7 @@ accuracyA1</code></pre>
 <pre class="r"><code>ooseA1 &lt;- 1 - as.numeric(confusionMatrix(myTesting$classe, predictionsA1)$overall[1])
 ooseA1</code></pre>
 <pre><code>## [1] 0.2705837</code></pre>
-<p>So, the estimated accuracy of the model is 73.20% and the estimated out-of-sample error is 26.80%.</p>
+<p>So, the estimated accuracy of the model is 73% and the estimated out-of-sample error is 27%.</p>
 <div id="ml-algorithms-for-perdiction-random-forests" class="section level2">
 <h2>ML algorithms for perdiction : Random Forests</h2>
 <pre class="r"><code>modFitB1 &lt;- randomForest(classe ~. , data=myTraining)</code></pre>
@@ -375,12 +375,12 @@ accuracyB1</code></pre>
 <pre class="r"><code>ooseB1 &lt;- 1 - as.numeric(confusionMatrix(myTesting$classe, predictionsB1)$overall[1])
 ooseB1</code></pre>
 <pre><code>## [1] 0.005353046</code></pre>
-<p>So, the estimated accuracy of the model is 99.43% and the estimated out-of-sample error is .57%.</p>
+<p>So, the estimated accuracy of the model is 99.43% and the estimated out-of-sample error is .54%.</p>
 </div>
 </div>
 <div id="decision-on-which-prediction-model-to-use" class="section level1">
 <h1>Decision on which Prediction Model to Use:</h1>
-<p>Random Forest algorithm performed better than Decision Trees. Accuracy for Random Forest model was 0.994 (95% CI: (0.993, 0.994)) compared to Decision Tree model with 0.732 (95% CI: (0.661, 0.732)). The Random Forests model is choosen. The expected out-of-sample error is estimated at 0.005, or 0.5%.</p>
+<p>Random Forest algorithm performed better than Decision Trees. Accuracy for Random Forest model was 0.994 (95% CI: (0.993, 0.994)) compared to Decision Tree model with 0.732 (95% CI: (0.661, 0.732)). The Random Forests model is chosen. The expected out-of-sample error is estimated at 0.005, or 0.5%.</p>
 <pre class="r"><code># Generating the answers for the Assignment:
 predictionsB2 &lt;- predict(modFitB1, testing, type = &quot;class&quot;)</code></pre>
 <pre><code>##  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 

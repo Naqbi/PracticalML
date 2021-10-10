@@ -140,7 +140,7 @@ accuracyA1
 ooseA1 <- 1 - as.numeric(confusionMatrix(myTesting$classe, predictionsA1)$overall[1])
 ooseA1
 ```
-So, the estimated accuracy of the model is 73.20% and the estimated out-of-sample error is 26.80%.
+So, the estimated accuracy of the model is 73% and the estimated out-of-sample error is 27%.
 
 ## ML algorithms for perdiction : Random Forests
 ``` {r}
@@ -160,7 +160,7 @@ ooseB1 <- 1 - as.numeric(confusionMatrix(myTesting$classe, predictionsB1)$overal
 ooseB1
 ```
 
-So, the estimated accuracy of the model is 99.43% and the estimated out-of-sample error is .57%.
+So, the estimated accuracy of the model is 99.43% and the estimated out-of-sample error is .54%.
 
 # Decision on which Prediction Model to Use:
 Random Forest algorithm performed better than Decision Trees. Accuracy for Random Forest model was 0.994 (95% CI: (0.993, 0.994)) compared to Decision Tree model with 0.732 (95% CI: (0.661, 0.732)). The Random Forests model is chosen. The expected out-of-sample error is estimated at 0.005, or 0.5%.
