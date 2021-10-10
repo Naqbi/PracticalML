@@ -99,9 +99,9 @@ myTesting <- myTesting[, colSums(is.na(myTesting)) == 0]
 
 # find and remove corelated variables/centering and scaling the data
 findCorrelation(cor(myTraining[,-53]), cutoff = .9, names = T)
-findCorrelation(cor(myTesting[,-53]), cutoff = .9, names = T)
-
 myTraining <- myTraining[, -c(10, 1, 9, 8, 31, 33, 18)]
+
+findCorrelation(cor(myTesting[,-53]), cutoff = .9, names = T)
 myTesting <- myTesting[, -c(1, 10, 8, 9, 18)]
 
 nzv_train <- nearZeroVar(myTraining, saveMetrics=TRUE)
@@ -117,9 +117,9 @@ modFitA1 <- rpart(classe ~ ., data=myTraining, method="class")
 rpart.plot(modFitA1, main="Decision Tree", extra=102, under=TRUE, faclen=0)
 ```
 
-Refer to PDF file to see the decision tree clearly.
+Refer to [PDF file](https://github.com/Naqbi/PracticalML/blob/main/Dec_Tree.pdf) to see the decision tree clearly.
 
-``` {r echo = FALSE}
+``` {r, echo = FALSE, results="hide"}
 pdf(file = "Dec_Tree.pdf", paper = "a4r")
 rpart.plot(modFitA1, main="Decision Tree", extra=102, under=TRUE, faclen=0)
 dev.off()
