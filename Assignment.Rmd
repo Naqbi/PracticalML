@@ -101,6 +101,9 @@ myTesting <- myTesting[, colSums(is.na(myTesting)) == 0]
 findCorrelation(cor(myTraining[,-53]), cutoff = .9, names = T)
 findCorrelation(cor(myTesting[,-53]), cutoff = .9, names = T)
 
+myTraining <- myTraining[, -c(10, 1, 9, 8, 31, 33, 18)]
+myTesting <- myTesting[, -c(1, 10, 8, 9, 18)]
+
 nzv_train <- nearZeroVar(myTraining, saveMetrics=TRUE)
 if (any(nzv_train$nzv_train)) nzv_train else message("No variables with near zero variance")
 
