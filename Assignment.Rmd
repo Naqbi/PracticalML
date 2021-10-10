@@ -163,7 +163,7 @@ ooseB1
 So, the estimated accuracy of the model is 99.43% and the estimated out-of-sample error is .57%.
 
 # Decision on which Prediction Model to Use:
-Random Forest algorithm performed better than Decision Trees. Accuracy for Random Forest model was 0.994 (95% CI: (0.993, 0.994)) compared to Decision Tree model with 0.732 (95% CI: (0.661, 0.732)). The Random Forests model is choosen. The expected out-of-sample error is estimated at 0.005, or 0.5%.
+Random Forest algorithm performed better than Decision Trees. Accuracy for Random Forest model was 0.994 (95% CI: (0.993, 0.994)) compared to Decision Tree model with 0.732 (95% CI: (0.661, 0.732)). The Random Forests model is chosen. The expected out-of-sample error is estimated at 0.005, or 0.5%.
 
 ``` {r}
 # Generating the answers for the Assignment:
